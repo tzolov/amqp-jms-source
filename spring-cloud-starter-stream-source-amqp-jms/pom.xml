@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.springframework.cloud.stream.app</groupId>
+  <artifactId>spring-cloud-starter-stream-source-amqp-jms</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>spring-cloud-starter-stream-source-amqp-jms</name>
+  <description>Demo project for Spring Boot</description>
+
+  <parent>
+    <groupId>org.springframework.cloud.stream.app</groupId>
+    <artifactId>amqp-jms-app-starters-build</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <docker.image>${project.artifactId}-app</docker.image>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <qpid.version>0.21.0</qpid.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.apache.qpid</groupId>
+      <artifactId>qpid-jms-client</artifactId>
+      <version>${qpid.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud.stream.app</groupId>
+      <artifactId>spring-cloud-starter-stream-source-jms</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.integration</groupId>
+      <artifactId>spring-integration-jms</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.integration</groupId>
+      <artifactId>spring-integration-java-dsl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.jms</groupId>
+      <artifactId>jms-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-broker</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-app-starter-doc-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.cloud.stream.app.plugin</groupId>
+        <artifactId>spring-cloud-stream-app-maven-plugin</artifactId>
+        <configuration>
+          <generatedProjectHome>${session.executionRootDirectory}/apps</generatedProjectHome>
+          <generatedProjectVersion>${project.version}</generatedProjectVersion>
+          <bom>
+            <name>scs-bom</name>
+            <groupId>org.springframework.cloud.stream.app</groupId>
+            <artifactId>amqp-jms-app-dependencies</artifactId>
+            <version>${project.version}</version>
+          </bom>
+          <generatedApps>
+            <amqp-jms-source></amqp-jms-source>
+            <!--<jms-source>-->
+              <!--<extraTestConfigClass>org.springframework.cloud.stream.app.test.jms.JmsSourceTestConfiguration.class</extraTestConfigClass>-->
+            <!--</jms-source>-->
+          </generatedApps>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
