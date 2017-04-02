@@ -13,26 +13,6 @@ this wil produce `apps` pom project with 3 sub-projects:
 
 Note: In the 3 sub-project you must manually later the the `pom.xml` and replace the version 
 of the `app-starters-core-dependencies` from `0.0.1-SNAPSHOT` to `1.1.1.RELEASE`. Like this:
- 
-```xml
-      <dependency>
-        <groupId>org.springframework.cloud.stream.app</groupId>
-        <artifactId>app-starters-core-dependencies</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-```
- 
-```xml
-      <dependency>
-        <groupId>org.springframework.cloud.stream.app</groupId>
-        <artifactId>app-starters-core-dependencies</artifactId>
-        <version>1.1.1.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-```
 
 Then build the `amqp-jms-sourc` for the tree binders. 
 ```bash
