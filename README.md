@@ -67,3 +67,28 @@ dataflow:>app register --type source --name amqp-jms --uri file:///…./amqp-jms
 dataflow:>stream create --name amqpSimple --definition "amqp-jms --qpid.jms.username=guest --qpid.jms.password=guest --destination=TEST | log" --deploy
 ```
 
+## AMQPS (SSL) stream with properties file
+Define stream to consume TEST queue
+```bash
+dataflow:>stream create --name amqpsTest --definition "amqp-jms --destination=TEST | log"
+```
+Create `amqps.properties` file:
+```
+app.amqp-jms.amqp-jms-protocol=amqps
+app.amqp-jms.amqp-jms-hostname=localhost
+app.amqp-jms.amqp-jms-port=5671
+
+app.amqp-jms.qpid.jms.username=guest
+app.amqp-jms.qpid.jms.password=guest
+
+app.amqp-jms.qpid.transport.keyStoreLocation=<path/to/certificates>/client.ks
+app.amqp-jms.qpid.transport.keyStorePassword=<keystore-password>
+app.amqp-jms.qpid.transport.trustStoreLocation=<path/to/certificates>/client.ts
+app.amqp-jms.qpid.transport.trustStorePassword=<truststore-password>
+```
+Note that by SCDF convention the properties start with ‘app’ prefix followed by the name of the module being configured (e.g. ‘amqp-jms’). 
+
+Deploy with the amqps.properties file
+```
+dataflow:>stream deploy --name amqpsTest --propertiesFile amqps.properties
+```
